@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XYDHQZT7SC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      // Configure Google Analytics with custom definitions
+      gtag('config', 'G-XYDHQZT7SC', {
+        'custom_map': {
+          // Custom Dimensions
+          'dimension1': 'form_interaction_stage',
+          'dimension2': 'user_device_type',
+          'dimension3': 'has_attachment',
+          // Custom Metrics
+          'metric1': 'age',
+          'metric2': 'message_characters'
+        }
+      });
+
+      // Send initial page_view event with custom dimensions on page load
+      gtag('event', 'page_view', {
+        'page_title': 'Contact Us Page',
+        'page_location': window.location.href,
+        'page_path': window.location.pathname,
+        'form_interaction_stage': 'loaded', // Custom Dimension 1: Page has loaded
+        'user_device_type': (function() { // Custom Dimension 2: Detect device type
+            const ua = navigator.userAgent;
+            if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
+                return 'tablet';
+            }
+            if (/Mobile|iP(hone|od)|Android|BlackBerry|IEMobile|Kindle|Silk-Source|Jasmine|Opera Mini|webOS|UAWAP|Windows Phone|SMART-TV/i.test(ua)) {
+                return 'mobile';
+            }
+            return 'desktop';
+        })()
+      });
+    </script>
+    </head>
+<body style="font-family: 'Open Sans', sans-serif; margin: 0; padding: 0; background-color: #F8F4E3; color: #333; display: flex; justify-content: center; align-items: center; min-height: 100vh; box-sizing: border-box;">
+
+    <div class="contact-container" style="background-color: #FFFFFF; border-radius: 12px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); width: 90%; max-width: 1100px; padding: 40px; display: flex; flex-direction: column; gap: 30px;">
+        <a href="index.html" class="contact-home"><img src="./electric-icon.png" class="contact-icon"><span>ELECTRIC</span></a>
+        <div class="contact-header" style="text-align: center; margin-bottom: 20px;">
+            <h1 style="font-family: 'Montserrat', sans-serif; font-size: 2.8em; color: #364F6B; margin-bottom: 10px;">Get in Touch</h1>
+            <p style="font-size: 1.1em; color: #555; line-height: 1.6;">We'd love to hear from you! Fill out the form below or reach out directly.</p>
+        </div>
+
+        <div class="contact-content" style="display: flex; flex-wrap: wrap; gap: 40px; justify-content: space-between;">
+
+            <div class="contact-form-wrapper" style="flex: 2; min-width: 300px;">
+                <form action="#" method="POST" enctype="multipart/form-data" class="contact-form">
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label for="name" style="display: block; font-weight: 600; margin-bottom: 8px; color: #444; font-size: 1em;">Name</label>
+                        <input type="text" id="name" name="name" required style="width: calc(100% - 28px); padding: 14px; border: 1px solid #364F6B; border-radius: 6px; font-size: 1em; font-family: 'Open Sans', sans-serif; box-sizing: border-box;">
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label for="email" style="display: block; font-weight: 600; margin-bottom: 8px; color: #444; font-size: 1em;">Email</label>
+                        <input type="email" id="email" name="email" required style="width: calc(100% - 28px); padding: 14px; border: 1px solid #364F6B; border-radius: 6px; font-size: 1em; font-family: 'Open Sans', sans-serif; box-sizing: border-box;">
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label for="age" style="display: block; font-weight: 600; margin-bottom: 8px; color: #444; font-size: 1em;">Age</label>
+                        <input type="number" id="age" name="age" min="1" max="120" style="width: calc(100% - 28px); padding: 14px; border: 1px solid #364F6B; border-radius: 6px; font-size: 1em; font-family: 'Open Sans', sans-serif; box-sizing: border-box;">
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label for="subject" style="display: block; font-weight: 600; margin-bottom: 8px; color: #444; font-size: 1em;">Subject</label>
+                        <input type="text" id="subject" name="subject" style="width: calc(100% - 28px); padding: 14px; border: 1px solid #364F6B; border-radius: 6px; font-size: 1em; font-family: 'Open Sans', sans-serif; box-sizing: border-box;">
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label for="message" style="display: block; font-weight: 600; margin-bottom: 8px; color: #444; font-size: 1em;">Message</label>
+                        <textarea id="message" name="message" rows="6" required style="width: calc(100% - 28px); padding: 14px; border: 1px solid #364F6B; border-radius: 6px; font-size: 1em; font-family: 'Open Sans', sans-serif; resize: vertical; box-sizing: border-box;"></textarea>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label for="attachment" style="display: block; font-weight: 600; margin-bottom: 8px; color: #444; font-size: 1em;">Attach File (Optional)</label>
+                        <input type="file" id="attachment" name="attachment" style="width: 100%; padding: 12px 0; border: 1px solid #D1E8E2; border-radius: 6px; font-size: 1em; font-family: 'Open Sans', sans-serif; box-sizing: border-box; background-color: #F8F8F8;">
+                    </div>
+
+                    <button type="submit" class="submit-btn" style="background-color: #5D9ECB; color: #FFFFFF; padding: 15px 30px; border: none; border-radius: 6px; font-size: 1.1em; font-weight: 600; cursor: pointer; transition: background-color 0.3s ease, transform 0.2s ease; width: 100%; box-sizing: border-box;">Send Message</button>
+                </form>
+            </div>
+
+            <div class="contact-info" style="flex: 1; min-width: 250px; background-color: #ECF7F7; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);">
+                <h2 style="font-family: 'Montserrat', sans-serif; color: #364F6B; margin-bottom: 20px; font-size: 1.8em;">Our Details</h2>
+                <p style="margin-bottom: 15px; line-height: 1.8;"><strong style="color: #444;">Address:</strong> Delhi, India</p>
+                <p style="margin-bottom: 15px; line-height: 1.8;"><strong style="color: #444;">Phone:</strong> +91 1234567890</p>
+                <p style="margin-bottom: 15px; line-height: 1.8;"><strong style="color: #444;">Email:</strong> info@Electric.com</p>
+
+                <h3 style="font-family: 'Montserrat', sans-serif; color: #364F6B; margin-top: 30px; margin-bottom: 15px;">Follow Us</h3>
+                <div class="social-links" style="margin-top: 20px; display: flex; gap: 15px;">
+                    <a href="#" class="social-icon" style="display: flex; justify-content: center; align-items: center; width: 40px; height: 40px; background-color: #5D9ECB; color: #FFFFFF; border-radius: 50%; text-decoration: none; font-size: 1.2em; transition: background-color 0.3s ease, transform 0.2s ease;">F</a>
+                    <a href="#" class="social-icon" style="display: flex; justify-content: center; align-items: center; width: 40px; height: 40px; background-color: #5D9ECB; color: #FFFFFF; border-radius: 50%; text-decoration: none; font-size: 1.2em; transition: background-color 0.3s ease, transform 0.2s ease;">T</a>
+                    <a href="#" class="social-icon" style="display: flex; justify-content: center; align-items: center; width: 40px; height: 40px; background-color: #5D9ECB; color: #FFFFFF; border-radius: 50%; text-decoration: none; font-size: 1.2em; transition: background-color 0.3s ease, transform 0.2s ease;">L</a>
+                    <a href="#" class="social-icon" style="display: flex; justify-content: center; align-items: center; width: 40px; height: 40px; background-color: #5D9ECB; color: #FFFFFF; border-radius: 50%; text-decoration: none; font-size: 1.2em; transition: background-color 0.3s ease, transform 0.2s ease;">I</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const contactForm = document.querySelector('.contact-form');
+        const ageInput = document.getElementById('age');
+        const messageInput = document.getElementById('message');
+        const attachmentInput = document.getElementById('attachment');
+
+        // Track when user starts interacting with form (e.g., clicks on an input)
+        contactForm.addEventListener('focusin', function(event) {
+            gtag('event', 'form_interaction', {
+                'form_name': 'contact_us_form',
+                'form_interaction_stage': 'started_filling' // Custom Dimension 1: User started filling form
+            });
+        }, { once: true }); // Only trigger once
+
+        // Track form submission
+        contactForm.addEventListener('submit', function(event) {
+            const age = ageInput.value ? parseInt(ageInput.value) : 0; // Get age, default to 0 if not entered
+            const messageCharacters = messageInput.value ? messageInput.value.length : 0; // Get message character length
+            const hasAttachment = attachmentInput.files.length > 0 ? 'yes' : 'no'; // Custom Dimension 3
+
+            // Send event for form submission attempt with custom metrics and dimensions
+            gtag('event', 'contact_form_submission', {
+                'form_name': 'contact_us_form',
+                'form_interaction_stage': 'submitted', // Custom Dimension 1: Form submitted
+                'has_attachment': hasAttachment, // Custom Dimension 3
+                'age': age, // Custom Metric 1
+                'message_characters': messageCharacters, // Custom Metric 2
+                'submission_count': 1
+            });
+
+            // In a real application, you would typically handle form submission via AJAX
+            // and send a 'contact_form_submission_success' or 'contact_form_submission_error'
+            // event after receiving a response from your server.
+            // For this example, we'll just send the event on submission attempt.
+            // event.preventDefault(); // Uncomment this if you're handling submission via AJAX
+            // alert('Form submitted! Check your Google Analytics for events.');
+        });
+    </script>
+    </body>
+</html>
