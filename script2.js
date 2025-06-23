@@ -16,6 +16,10 @@ document.addEventListener('DOMContentLoaded', () => { // <--- IMPORTANT: Wrap ev
     const cartSmIcon = document.getElementById('cart_icon_sm'); // The small screen cart open button
     const crtBtn = document.getElementById('crt-btn'); // The 'x' close button inside the cart
 
+    // New: References for custom link click events
+    const desktopContactLink = document.getElementById('desktopContactLink');
+    const footerContactUsLink = document.getElementById('footerContactUsLink');
+
 
     // --- Event Listeners ---
 
@@ -39,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => { // <--- IMPORTANT: Wrap ev
                     const productName = productCard.querySelector('.product-title').textContent;
                     // Ensure productPrice is parsed correctly, remove '$' if present
                     const productPriceText = productCard.querySelector('.product-price').textContent;
-                    const productPrice = Number(productPriceText.replace('$', '')); 
+                    const productPrice = Number(productPriceText.replace('₹', '').replace(',', '')); // Handle Indian Rupee symbol and commas
                     const imageSrc = productCard.querySelector('.product-image').src;
 
                     cartnum += 1;
@@ -47,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => { // <--- IMPORTANT: Wrap ev
 
                     // Update the total quantity and price displays
                     cartNumDisplay.innerText = cartnum;
-                    cartPriceDisplay.innerText = cartprice; // Display as number, format later if needed
+                    cartPriceDisplay.innerText = cartprice.toFixed(2); // Format price for display
 
                     // Create elements using createElement (more robust than innerHTML for appending)
                     const newItemDiv = document.createElement('div');
@@ -57,14 +61,14 @@ document.addEventListener('DOMContentLoaded', () => { // <--- IMPORTANT: Wrap ev
                         <img src="${imageSrc}" class="h-28 w-28 object-cover rounded-md"/>
                         <div>
                             <h1 class="text-md font-semibold">${productName}</h1>
-                            <p>$${productPrice.toFixed(2)}</p>
+                            <p>₹${productPrice.toFixed(2)}</p>
                             </div>
                     `;
                     
                     // Append the new item div to the *dedicated cart items display container*
                     cartDisplayElement.appendChild(newItemDiv); 
                     
-                    console.log(`Added: ${productName}, Price: $${productPrice.toFixed(2)}, Total Cart Value: $${cartprice.toFixed(2)}, Items in Cart: ${cartnum}`);
+                    console.log(`Added: ${productName}, Price: ₹${productPrice.toFixed(2)}, Total Cart Value: ₹${cartprice.toFixed(2)}, Items in Cart: ${cartnum}`);
 
                     // Optional: Open the cart automatically when an item is added
                     // if (cartContainer && cartContainer.classList.contains('hidden')) {
@@ -121,6 +125,39 @@ document.addEventListener('DOMContentLoaded', () => { // <--- IMPORTANT: Wrap ev
         console.error("Cart close button or cart container not found for 'x' button functionality.");
     }
 
+    // New: Custom dataLayer push for Contact links
+    // Desktop navigation 'Contact' link
+    if (desktopContactLink) {
+        desktopContactLink.addEventListener('click', function(event) {
+            // No event.preventDefault() here so the link navigates normally
+            console.log('Pushing custom link click event for Desktop Contact link');
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                'event': 'custom_link_click',
+                'link_text': this.textContent,
+                'link_url': this.href
+            });
+        });
+    } else {
+        console.warn("Desktop Contact link not found for dataLayer event.");
+    }
+
+    // Footer 'Contact Us' link
+    if (footerContactUsLink) {
+        footerContactUsLink.addEventListener('click', function(event) {
+            // No event.preventDefault() here so the link navigates normally
+            console.log('Pushing custom link click event for Footer Contact Us link');
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                'event': 'custom_link_click',
+                'link_text': this.textContent,
+                'link_url': this.href
+            });
+        });
+    } else {
+        console.warn("Footer Contact Us link not found for dataLayer event.");
+    }
+
     // --- IMPORTANT: Event Delegation for dynamic elements inside the cart (e.g., "Remove Item" buttons) ---
     // If you plan to add "Remove Item" buttons inside the dynamically added product divs in the cart,
     // you would add an event listener to 'cartDisplayElement' (the parent of those items)
@@ -132,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => { // <--- IMPORTANT: Wrap ev
     //             const itemToRemove = event.target.closest('.flex.items-center.gap-2'); // Adjust selector to find the item's parent div
     //             if (itemToRemove) {
     //                 // Get product info from itemToRemove to update cartprice/cartnum
-    //                 const priceToRemove = parseFloat(itemToRemove.querySelector('p').textContent.replace('$', ''));
+    //                 const priceToRemove = parseFloat(itemToRemove.querySelector('p').textContent.replace('₹', ''));
     //                 itemToRemove.remove(); // Remove the item from the DOM
     //                 cartnum -= 1;
     //                 cartprice -= priceToRemove;
@@ -155,6 +192,11 @@ document.addEventListener('DOMContentLoaded', () => { // <--- IMPORTANT: Wrap ev
          * @param {number} n - The index of the slide to display.
          */
         function showSlides(n) {
+            if (!slides || dots.length === 0) { // Add null checks for elements
+                console.warn("Carousel elements not found. Carousel will not function.");
+                return;
+            }
+
             if (n >= totalSlides) {
                 slideIndex = 0; // Loop back to the first slide
             }
@@ -203,3 +245,4 @@ document.addEventListener('DOMContentLoaded', () => { // <--- IMPORTANT: Wrap ev
             // For example, if script.js has an init function:
             // initCart();
         };
+
